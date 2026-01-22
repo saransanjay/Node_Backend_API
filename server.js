@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 
 // load evn vars
 donenv.config({ path: './config/config.env' });
+
 // Connect to database
 connectDB();
 // Route files
@@ -11,6 +12,9 @@ import bootcamps from './routes/bootcamps.js';
 
 
 const app = express();
+
+//// Body parser
+app.use(express.json());
 
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps)

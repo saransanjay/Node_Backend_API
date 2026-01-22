@@ -1,4 +1,5 @@
 import Bootcamp from "../models/Bootcamp.js";
+// Bootcamp 
 
 // @desc Get all bootcamps
 // @route GET /api/v1/bootcamps
@@ -18,8 +19,20 @@ export const getBootcamp = (req, res, next) => {
 // @desc Carete new bootcamp
 // @route POST /api/v1/bootcamps
 // @access Public
-export const createBootcamps = (req, res, next) => {
-    res.json({ sucess: true, msg: `Create new bootcamps` });
+export const createBootcamps = async (req, res, next) => {
+
+    try {
+        const bootcamp = await Bootcamp.create(req.body);
+        res.status(201).json({
+            success: true,
+            data: bootcamp
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            success: false
+        })
+    }
 }
 
 
