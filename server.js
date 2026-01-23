@@ -1,6 +1,7 @@
 import express from 'express';
 import donenv from 'dotenv';
 import connectDB from './config/db.js';
+import morgan from 'morgan';
 
 // load evn vars
 donenv.config({ path: './config/config.env' });
@@ -12,6 +13,13 @@ import bootcamps from './routes/bootcamps.js';
 
 
 const app = express();
+
+////  Dev logging middleware
+if (process.env.NODE_ENV === "development") {
+    app.use(morgan("dev"));
+}
+
+
 
 //// Body parser
 app.use(express.json());
