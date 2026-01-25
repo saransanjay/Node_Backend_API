@@ -2,15 +2,16 @@ import express from 'express';
 import donenv from 'dotenv';
 import connectDB from './config/db.js';
 import morgan from 'morgan';
+import errorHandler from './middleware/error.js';
 
 // load evn vars
 donenv.config({ path: './config/config.env' });
 
 // Connect to database
 connectDB();
+
 // Route files
 import bootcamps from './routes/bootcamps.js';
-
 
 const app = express();
 
@@ -19,13 +20,14 @@ if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
 
-
-
 //// Body parser
 app.use(express.json());
 
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps)
+
+// Error Handler
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,0 +1,7 @@
+const errorHandler = (err, req, res, next) => {
+    // Log to console for dev
+    console.log(err.stack);
+    res.status(500).json({ success: true, error: err.message });
+}
+
+export default errorHandler;
