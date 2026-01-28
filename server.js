@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import morgan from 'morgan';
 import errorHandler from './middleware/error.js';
 
+
 // load evn vars
 donenv.config({ path: './config/config.env' });
 
@@ -14,6 +15,7 @@ connectDB();
 import bootcamps from './routes/bootcamps.js';
 
 const app = express();
+app.set('query parser', 'extended');
 
 ////  Dev logging middleware
 if (process.env.NODE_ENV === "development") {
