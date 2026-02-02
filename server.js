@@ -1,12 +1,12 @@
 import express from 'express';
-import donenv from 'dotenv';
+import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import morgan from 'morgan';
 import errorHandler from './middleware/error.js';
 
 
 // load evn vars
-donenv.config({ path: './config/config.env' });
+dotenv.config({ path: './config/config.env' });
 
 // Connect to database
 connectDB();
