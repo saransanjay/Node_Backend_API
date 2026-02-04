@@ -7,9 +7,14 @@ import {
     deleteBootcamps
 } from '../controllers/bootcamps.js'
 
+// Include other resource routers
+import courseRouter from './courses.js';
+
 
 const router = express.Router();
 
+// Re-route into other resourse routers
+router.use('/:bootcampId/courses', courseRouter);
 
 router.route('/')
     .get(getBootcamps)
