@@ -1,8 +1,6 @@
 import Bootcamp from "../models/Bootcamp.js";
 import ErrorResponse from "../utils/errorResponse.js";
 import asyncHandler from "../middleware/async.js";
-import { parse } from "dotenv";
-
 
 // Bootcamp 
 
