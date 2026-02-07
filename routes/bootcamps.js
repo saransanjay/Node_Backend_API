@@ -4,7 +4,8 @@ import {
     getBootcamps,
     createBootcamps,
     updateBootcamps,
-    deleteBootcamps
+    deleteBootcamps,
+    bootcampPhotoUpload
 } from '../controllers/bootcamps.js'
 
 // Include other resource routers
@@ -15,6 +16,8 @@ const router = express.Router();
 
 // Re-route into other resourse routers
 router.use('/:bootcampId/courses', courseRouter);
+
+router.route('/:id/photo').put(bootcampPhotoUpload);
 
 router.route('/')
     .get(getBootcamps)

@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import morgan from 'morgan';
 import errorHandler from './middleware/error.js';
+import fileUpload from 'express-fileupload';
+import path from 'path';
 
 
 // load evn vars
@@ -22,6 +24,12 @@ app.set('query parser', 'extended');
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));
 }
+
+/// File Uploading
+app.use(fileUpload());
+
+/// set Static Folders
+app.use(express.static(path.join(import.meta.dirname, "public")))
 
 //// Body parser
 app.use(express.json());
