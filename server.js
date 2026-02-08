@@ -16,6 +16,7 @@ connectDB();
 // Route files
 import bootcamps from './routes/bootcamps.js';
 import courses from './routes/courses.js';
+import auth from './routes/auth.js';
 
 const app = express();
 app.set('query parser', 'extended');
@@ -37,6 +38,7 @@ app.use(express.json());
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
+app.use('/api/v1/auth', auth);
 
 // Error Handler
 app.use(errorHandler);
