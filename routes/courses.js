@@ -9,7 +9,11 @@ import {
 
 const router = express.Router({ mergeParams: true });
 
-router.route('/').get(getCourses).post(addCourse);
+// Import for advanced results
+import Course from "../models/Course.js";
+import advancedResults from "../middleware/advancedResults.js";
+
+router.route('/').get(advancedResults(Course, { path: 'bootcamp', select: 'name description' }), getCourses).post(addCourse);
 
 router.route('/:id').get(getCourse).put(updateCourse).delete(deleteCourse);
 

@@ -8,6 +8,11 @@ import {
     bootcampPhotoUpload
 } from '../controllers/bootcamps.js'
 
+// Import for advance result 
+import Bootcamp from '../models/Bootcamp.js';
+import advancedResults from '../middleware/advancedResults.js';
+
+
 // Include other resource routers
 import courseRouter from './courses.js';
 
@@ -20,7 +25,7 @@ router.use('/:bootcampId/courses', courseRouter);
 router.route('/:id/photo').put(bootcampPhotoUpload);
 
 router.route('/')
-    .get(getBootcamps)
+    .get(advancedResults(Bootcamp, "courses"), getBootcamps)
     .post(createBootcamps);
 
 router.route('/:id')
