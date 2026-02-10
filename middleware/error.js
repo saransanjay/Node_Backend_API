@@ -25,7 +25,7 @@ const errorHandler = (err, req, res, next) => {
         error = new ErrorResponse(message, 400);
     }
 
-    res.status(error.statusCode || 500).json({ success: true, error: error.message } || "Server Error");
+    res.status(error.statusCode || 500).json({ success: false, error: error.message } || "Server Error");
 }
 
 export default errorHandler;
