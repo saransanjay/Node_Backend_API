@@ -3,8 +3,6 @@ import asyncHandler from '../middleware/async.js';
 import User from '../models/User.js';
 
 
-
-
 // @desc    Register user
 // @route   POST /api/v1/auth/register
 //access    public     
