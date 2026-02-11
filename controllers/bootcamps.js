@@ -34,7 +34,7 @@ export const getBootcamp = asyncHandler(async (req, res, next) => {
 
 // @desc Carete new bootcamp
 // @route POST /api/v1/bootcamps
-// @access Public
+// @access private
 export const createBootcamps = asyncHandler(async (req, res, next) => {
 
     const bootcamp = await Bootcamp.create(req.body);
