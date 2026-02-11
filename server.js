@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import errorHandler from './middleware/error.js';
 import fileUpload from 'express-fileupload';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 
 
 // load evn vars
@@ -34,6 +35,10 @@ app.use(express.static(path.join(import.meta.dirname, "public")))
 
 //// Body parser
 app.use(express.json());
+
+// Cookie parser
+app.use(cookieParser());
+
 
 // Mount routers
 app.use('/api/v1/bootcamps', bootcamps);

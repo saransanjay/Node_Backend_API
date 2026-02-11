@@ -16,21 +16,25 @@ import advancedResults from '../middleware/advancedResults.js';
 // Include other resource routers
 import courseRouter from './courses.js';
 
+// Import the route protect
+import { protect } from '../middleware/auth.js';
 
 const router = express.Router();
+
+
 
 // Re-route into other resourse routers
 router.use('/:bootcampId/courses', courseRouter);
 
-router.route('/:id/photo').put(bootcampPhotoUpload);
+router.route('/:id/photo').put(protect, bootcampPhotoUpload);
 
 router.route('/')
     .get(advancedResults(Bootcamp, "courses"), getBootcamps)
-    .post(createBootcamps);
+    .post(protect, createBootcamps);
 
 router.route('/:id')
     .get(getBootcamp)
-    .put(updateBootcamps)
-    .delete(deleteBootcamps);
+    .put(protect, updateBootcamps)
+    .delete(protect, deleteBootcamps);
 
 export default router;
