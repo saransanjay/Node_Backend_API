@@ -30,7 +30,7 @@ const importData = async () => {
     try {
         await Bootcamps.create(bootcamps)
         await Courses.create(courses)
-        await users.create(users);
+        await User.create(users);
 
         console.log('\x1b[32m', `Data Imported....`);
     } catch (error) {
