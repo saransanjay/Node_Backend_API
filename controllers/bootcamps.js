@@ -10,7 +10,7 @@ import path from "path";
 // @access Public
 export const getBootcamps = asyncHandler(async (req, res, next) => {
 
-    res.status(200).json(res.advancedResults)
+    res.status(200).json(res.advancedResults);
 
 });
 

@@ -18,6 +18,8 @@ connectDB();
 import bootcamps from './routes/bootcamps.js';
 import courses from './routes/courses.js';
 import auth from './routes/auth.js';
+import users from './routes/users.js';
+
 
 const app = express();
 app.set('query parser', 'extended');
@@ -44,6 +46,8 @@ app.use(cookieParser());
 app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/users', users);
+
 
 // Error Handler
 app.use(errorHandler);
