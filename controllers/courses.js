@@ -80,8 +80,6 @@ export const updateCourse = asyncHandler(async (req, res, next) => {
 
     let course = await Course.findById(req.params.id);
 
-    console.log(req.body);
-
     if (!course) {
         return next(new ErrorResponse(`No course with the id of ${req.params.id}`), 404);
     }

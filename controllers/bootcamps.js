@@ -121,7 +121,6 @@ export const bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
     }
 
     const file = req.files.file;
-    console.log(file.mimetype);
 
     // File type validation mimetype
     if (!file.mimetype.startsWith("image")) {

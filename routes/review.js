@@ -2,7 +2,9 @@ import express from "express";
 import {
     getReviews,
     getReview,
-    addReview
+    addReview,
+    updateReview,
+    deleteReview
 } from '../controllers/review.js'
 
 // Import the route protect and authorization
@@ -20,6 +22,8 @@ router.route('/')
 
 
 router.route('/:id')
-    .get(getReview);
+    .get(getReview)
+    .put(protect, authorize('user', 'admin'), updateReview)
+    .delete(protect, authorize('user', 'admin'), deleteReview);
 
 export default router;
