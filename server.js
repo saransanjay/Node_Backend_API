@@ -19,7 +19,7 @@ import bootcamps from './routes/bootcamps.js';
 import courses from './routes/courses.js';
 import auth from './routes/auth.js';
 import users from './routes/users.js';
-
+import reviews from './routes/review.js';
 
 const app = express();
 app.set('query parser', 'extended');
@@ -47,6 +47,8 @@ app.use('/api/v1/bootcamps', bootcamps);
 app.use('/api/v1/courses', courses);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
+app.use('/api/v1/reviews', reviews);
+
 
 
 // Error Handler

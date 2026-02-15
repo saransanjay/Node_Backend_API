@@ -15,6 +15,7 @@ import advancedResults from '../middleware/advancedResults.js';
 
 // Include other resource routers
 import courseRouter from './courses.js';
+import reviewRouter from './review.js';
 
 // Import the route protect
 import { protect } from '../middleware/auth.js';
@@ -24,10 +25,10 @@ import { authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
-
-
 // Re-route into other resourse routers
 router.use('/:bootcampId/courses', courseRouter);
+router.use('/:bootcampId/reviews', reviewRouter);
+
 
 router.route('/:id/photo').put(protect, authorize('publisher', 'admin'), bootcampPhotoUpload);
 

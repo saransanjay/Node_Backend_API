@@ -12,6 +12,7 @@ dotenv.config({ path: './config/config.env' });
 import Bootcamps from "./models/Bootcamp.js";
 import Courses from "./models/Course.js";
 import User from "./models/User.js";
+import Review from "./models/Review.js";
 
 
 
@@ -23,6 +24,9 @@ mongoose.connect(process.env.MONGO_URI, clientOptions);
 const bootcamps = JSON.parse(fs.readFileSync(`${import.meta.dirname}/_data/bootcamps.json`, `utf-8`));
 const courses = JSON.parse(fs.readFileSync(`${import.meta.dirname}/_data/courses.json`, `utf-8`));
 const users = JSON.parse(fs.readFileSync(`${import.meta.dirname}/_data/users.json`, `utf-8`));
+const reviews = JSON.parse(fs.readFileSync(`${import.meta.dirname}/_data/reviews.json`, `utf-8`));
+
+
 
 
 ///  Import into DB 
@@ -31,6 +35,8 @@ const importData = async () => {
         await Bootcamps.create(bootcamps)
         await Courses.create(courses)
         await User.create(users);
+        await Review.create(reviews);
+
 
         console.log('\x1b[32m', `Data Imported....`);
     } catch (error) {
@@ -44,6 +50,7 @@ const deleteData = async () => {
         await Bootcamps.deleteMany();
         await Courses.deleteMany();
         await User.deleteMany();
+        await Review.deleteMany();
 
         console.log('\x1b[31m', `Data Destoryed....`);
     } catch (error) {
