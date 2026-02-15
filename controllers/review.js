@@ -8,7 +8,6 @@ import Bootcamp from "../models/Bootcamp.js";
 // @route   GET /api/v1/reviews
 // @route   GET /api/v1/bootcamps/:bootcampId/reviews
 // @access  Public
-
 export const getReviews = asyncHandler(async (req, res, next) => {
 
 
@@ -32,7 +31,6 @@ export const getReviews = asyncHandler(async (req, res, next) => {
 // @desc    Get single review
 // @route   GET /api/v1/reviews/:id
 // @access  Public
-
 export const getReview = asyncHandler(async (req, res, next) => {
 
     const review = await Review.findById(req.params.id).populate({ path: 'bootcamp', select: 'name description' });
@@ -45,4 +43,27 @@ export const getReview = asyncHandler(async (req, res, next) => {
         success: true,
         data: review
     })
+});
+
+// @desc    Add Review
+// @route   POST /api/v1/bootcamp/:bootcampId/reviews
+// @access  private
+export const addReview = asyncHandler(async (req, res, next) => {
+
+    req.body.bootcamp = req.params.bootcampId;
+    req.body.user = req.user.id;
+
+    const bootcamp = await Bootcamp.findById(req.params.bootcampId);
+
+    if (!bootcamp) {
+        return next(new ErrorResponse(`No bootcamp with the id of ${req.params.bootcampId}`, 404));
+    }
+
+    const review = await Review.create(req.body);
+
+    res.status(201).json({
+        success: true,
+        data: review
+    })
+
 });
