@@ -6,7 +6,14 @@ import errorHandler from './middleware/error.js';
 import fileUpload from 'express-fileupload';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import mongoSanitize from 'express-mongo-sanitize';
+import helmet from 'helmet';
+import rateLimt from 'express-rate-limit';
+import hpp from 'hpp';
+import cors from 'cors';
 
+
+// import xss from 'xss-clean';
 
 // load evn vars
 dotenv.config({ path: './config/config.env' });
@@ -31,6 +38,33 @@ if (process.env.NODE_ENV === "development") {
 
 /// File Uploading
 app.use(fileUpload());
+
+/// Sanitize data 
+app.use((req, res, next) => {
+    mongoSanitize.sanitize(req.body);
+    mongoSanitize.sanitize(req.params);
+    next();
+});
+
+/// Set security headers
+app.use(helmet());
+
+/// Prevent XSS attacks
+// app.use(xss());
+
+/// Rate Limiting
+const limiter = rateLimt({
+    windowMs: 10 * 60 * 1000, //10 mins
+    max: 100
+});
+app.use(limiter);
+
+/// Prevent http param pollution
+app.use(hpp());
+
+/// Enable CORS
+app.use(cors());
+
 
 /// set Static Folders
 app.use(express.static(path.join(import.meta.dirname, "public")))
